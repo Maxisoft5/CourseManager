@@ -68,13 +68,13 @@
           <div id="createCourseForm">
               <label for="courseName"><b>Имя курса(на англ.)</b></label>
               <input type="text" placeholder="Enter a coure name e.g. (.Net Core)" name="courseName" 
-              pattern="[A-Za-z]" required maxlength="15" minlength="3">
+              pattern="[A-Za-z]" required maxlength="15" minlength="3" id = "courseName">
               <label for="description"><b>Описание</b></label>
               <input type="text" placeholder="Enter a description" name="description" 
-              pattern="[A-Za-z]" required maxlength="500" minlength="3">
+              pattern="[A-Za-z]" required maxlength="500" minlength="3" id="description">
               <label for="cost"><b>Цена</b></label>
               <input type="text" placeholder="Enter a сost" name="cost" 
-              pattern="[0-9]{,3}" required maxlength="999" minlength="1">
+              pattern="[0-9]{,3}" required maxlength="999" minlength="1" id="cost">
               <label for="day"><b>День недели</b></label>
               <select name="days" id="days" required>
                 <option value="Пн">Пн</option>

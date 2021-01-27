@@ -4,7 +4,7 @@ $(document).ready(function(){
     let calendar = document.getElementById("calendar");
     let userName = sessionStorage.getItem("username");
     let greetings = document.getElementById("greetings");
-        greetings.innerText = "Привет, " + userName;
+    greetings.innerText = "Привет, " + userName;
     for (let row = 0; row < calendar.rows.length; row++)
     {
         for (let cell = 0; cell < calendar.rows[row].cells.length; cell++)
@@ -23,28 +23,30 @@ $('cells').click(function() {
 });
 
 function CreateCourse() {
+    let courseManager = new CourseManager();
     console.log(CourseManager._courses);
     console.log(CourseManager._courses.length);
-    let dayOfWeek = document.getElementsByName("days").value;
-    let startTime = document.getElementsByName("startTime").value;
-    let endTime = document.getElementsByName("endTime").value;
-    let time = CourseManager._startTimes.get(startTime);
-    let column = CourseManager._daysOfWeek.get(dayOfWeek);
-    let id = `${time}${column}`;
-    let name = document.getElementsByName("courseName");
-    let description = document.getElementsByName("description");
-    let cost = document.getElementsByName("cost");
+    let dayOfWeek = document.getElementById("days").value;
+    let startTime = document.getElementById("startTime").value;
+    let endTime = document.getElementById("endTime").value;
+    let time = courseManager._startTimes.get(startTime);
+    let column = courseManager._daysOfWeek.get(dayOfWeek);
+    let id = `${time}${column+1}`;
+    let name = document.getElementById("courseName").value;
+    let description = document.getElementById("description").value;
+    let cost = document.getElementById("cost").value;
     let eventCalendar = document.getElementById("eventCalendar");
     CourseManager.createCourse(id, name, description, cost, dayOfWeek, startTime, endTime);
     if(CourseManager._courses.length === 0)
     {
         let title = document.createElement("p");
         title.innerText = "Events";
-        eventCalendar.append(title);
+        eventCalendar.appendChild(title);
     }
     let event = document.createElement("li");
-    event.innerText = $`${name} - ${description} - ${cost} - ${dayOfWeek} - ${startTime} - ${endTime}`;
-    eventCalendar.append(event);
+    event.innerText = ` ${++CourseManager._count} - ${name} - ${description} - ${cost} - ${dayOfWeek} - ${startTime} - ${endTime}`;
+    eventCalendar.setAttribute("style", "list-style-type: none;");
+    eventCalendar.appendChild(event);
     $("#emptyCalendar").hide();
     $("#createCourseBtn").value = "Добавить курс";
 }
@@ -53,12 +55,12 @@ function EditCourse() {
     console.log(CourseManager._courses);
     console.log(CourseManager._courses.length);
     let id = CourseManager._courses.length + 1;
-    let name = document.getElementsByName("courseName");
-    let description = document.getElementsByName("description");
-    let cost = document.getElementsByName("cost");
-    let dayOfWeek = document.getElementsByName("days").value;
-    let startTime = document.getElementsByName("startTime").value;
-    let endTime = document.getElementsByName("endTime").value;
+    let name = document.getElementById("courseName");
+    let description = document.getElementById("description");
+    let cost = document.getElementById("cost");
+    let dayOfWeek = document.getElementById("days").value;
+    let startTime = document.getElementById("startTime").value;
+    let endTime = document.getElementById("endTime").value;
     CourseManager.EditCourse(id, name, description, cost, dayOfWeek, startTime, endTime);
 }   
 
@@ -84,9 +86,11 @@ function HideEditForm(){
 }
 
 class CourseManager {
+
     static _courses = new Array();
     static _startTimes = new Map();
     static _daysOfWeek = new Map();
+    static _count = 0;
 
     static getCourses() {
         console.log(this._courses);
@@ -102,7 +106,7 @@ class CourseManager {
     static createCourse(id, name, description, cost, dayOfWeek, startTime, endTime) {
         let course = new Course(id, name, description, cost, dayOfWeek, startTime, endTime);
         console.log(course);
-        var td = document.getElementById("id");
+        var td = document.getElementById(`${id}`);
         td.innerText = name;
         this._courses.push(course);
         HideCreateForm();
@@ -119,23 +123,23 @@ class CourseManager {
         console.log(course);
     }
 
-    constructor(userName) {
-        let greetings = document.getElementById("greetings");
-        greetings.innerText = "Привет, " + userName;
-        _startTimes.Map("9:00",0);
-        _startTimes.Map("10:00",1);
-        _startTimes.Map("11:00",2);
-        _startTimes.Map("12:00",3);
-        _startTimes.Map("13:00",4);
-        _startTimes.Map("14:00",5);
-        _startTimes.Map("15:00",6);
-        _startTimes.Map("16:00",7);
-        _startTimes.Map("17:00",8);
-        _daysOfWeek.Map("Пн", 0);
-        _daysOfWeek.Map("Вт",1);
-        _daysOfWeek.Map("Ср",2);
-        _daysOfWeek.Map("Чт",3);
-        _daysOfWeek.Map("Пт",4);
+     constructor() {
+        this._startTimes = new Map();
+        this._daysOfWeek = new Map();
+        this._startTimes.set("9:00",0);
+        this._startTimes.set("10:00",1);
+        this._startTimes.set("11:00",2);
+        this._startTimes.set("12:00",3);
+        this._startTimes.set("13:00",4);
+        this._startTimes.set("14:00",5);
+        this._startTimes.set("15:00",6);
+        this._startTimes.set("16:00",7);
+        this._startTimes.set("17:00",8);
+        this._daysOfWeek.set("Пн", 0);
+        this._daysOfWeek.set("Вт",1);
+        this._daysOfWeek.set("Ср",2);
+        this._daysOfWeek.set("Чт",3);
+        this._daysOfWeek.set("Пт",4);
     }
 }
 
