@@ -24,8 +24,6 @@ $('cells').click(function() {
 
 function CreateCourse() {
     let courseManager = new CourseManager();
-    console.log(CourseManager._courses);
-    console.log(CourseManager._courses.length);
     let dayOfWeek = document.getElementById("days").value;
     let startTime = document.getElementById("startTime").value;
     let endTime = document.getElementById("endTime").value;
@@ -44,7 +42,8 @@ function CreateCourse() {
         eventCalendar.appendChild(title);
     }
     let event = document.createElement("li");
-    event.innerText = ` ${++CourseManager._count} - ${name} - ${description} - ${cost} - ${dayOfWeek} - ${startTime} - ${endTime}`;
+    event.id = id;
+    event.innerText = ` ${++CourseManager._count}. - ${name} - ${description} - ${cost} - ${dayOfWeek} - ${startTime} - ${endTime}`;
     eventCalendar.setAttribute("style", "list-style-type: none;");
     eventCalendar.appendChild(event);
     $("#emptyCalendar").hide();
@@ -52,36 +51,42 @@ function CreateCourse() {
 }
 
 function EditCourse() {
-    console.log(CourseManager._courses);
-    console.log(CourseManager._courses.length);
-    let id = CourseManager._courses.length + 1;
-    let name = document.getElementById("courseName");
-    let description = document.getElementById("description");
-    let cost = document.getElementById("cost");
+    let courseManager = new CourseManager();
     let dayOfWeek = document.getElementById("days").value;
     let startTime = document.getElementById("startTime").value;
     let endTime = document.getElementById("endTime").value;
+    let time = courseManager._startTimes.get(startTime);
+    let column = courseManager._daysOfWeek.get(dayOfWeek);
+    let id = `${time}${column+1}`;
+    let name = document.getElementById("courseName").value;
+    let description = document.getElementById("description").value;
+    let cost = document.getElementById("cost").value;
+    let eventCalendar = document.getElementById("eventCalendar");
     CourseManager.EditCourse(id, name, description, cost, dayOfWeek, startTime, endTime);
+    let event = document.getElementById(`${sessionStorage.getItem(cellId)}`);
+    event.innerText = `${++CourseManager._count}. - ${name} - ${description} - ${cost} - ${dayOfWeek} - ${startTime} - ${endTime}`;
 }   
 
 function DeleteCourse() {
     let id = sessionStorage.getItem("cellId");
+    let event = document.getElementById(`${sessionStorage.getItem(cellId)}`);
+    event.remove();
     CourseManager.deleteCourse(id);
 }
 
-function ShowCreateForm(){
+function ShowCreateForm() {
     $("#createCourseForm").show();
 }
 
-function HideCreateForm(){
+function HideCreateForm() {
     $("#createCourseForm").hide();
 }
 
-function ShowEditForm(){
+function ShowEditForm() {
     $("#editCourseForm").show();
 }
 
-function HideEditForm(){
+function HideEditForm() {
     $("#editCourseForm").hide();
 }
 
@@ -117,6 +122,8 @@ class CourseManager {
         if(course != undefined) {
         var index = this._courses.indexOf(course);
          this._courses.slice(index, 1);
+         var td = document.getElementById(`${id}`);
+         td.innerText = "";
         } else {
             console.log(`Course with id ${id} dosen't exist`);
         }
