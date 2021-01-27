@@ -1,0 +1,52 @@
+  body,  html {
+    background-color: white;
+    text-align: center;
+    background-color: black;
+  }
+
+  #login {
+      margin: 200px;
+  }
+
+  h3 {
+    color:white;
+    margin-right: 240px;
+    font-family: 'Roboto Medium', ari al;
+  }
+
+  input {
+    width: 250px;
+    padding-left: 10px;
+    color: white;
+    background-color: transparent;
+    border: rgb(56, 54, 54) solid 1px;
+  }
+
+  img {
+      margin-top: 3px;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 8px;
+  }
+
+  .icon {
+    border: rgb(56, 54, 54) solid 1px;
+    text-align: center;
+  }
+
+  .button-login {
+    width: 305px;
+    height: 40px;
+    color:white;
+    background-color: rgb(228, 171, 66);
+    border: rgb(243, 180, 64) solid 1px;
+    border-radius: 3px;
+  }
+
+  .warning {
+    border: red solid 1px;
+  }
