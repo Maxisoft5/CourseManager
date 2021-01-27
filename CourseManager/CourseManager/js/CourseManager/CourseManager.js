@@ -48,7 +48,7 @@ function CreateCourse() {
     eventCalendar.setAttribute("style", "list-style-type: none;");
     eventCalendar.appendChild(event);
     $("#emptyCalendar").hide();
-    $("#createCourseBtn").value = "Добавить курс";
+    document.getElementById("createCourseBtn").value = "Добавить курс";
 }
 
 function EditCourse() {
