@@ -46,6 +46,7 @@ function CreateCourse() {
     event.innerText = $`${name} - ${description} - ${cost} - ${dayOfWeek} - ${startTime} - ${endTime}`;
     eventCalendar.append(event);
     $("#emptyCalendar").hide();
+    $("#createCourseBtn").value = "Добавить курс";
 }
 
 function EditCourse() {

@@ -1,23 +1,17 @@
 function getUserName() {
     var userName = $("#username").val();
     sessionStorage.setItem("username", userName);
-    return true;
+    var regexName=/^([a-zA-Z]{3,16})$/;
+    var regexPasword=/^([a-zA-Z0-9]{6,16})$/;
+    
+    if (!userName.match(regexName) || !regexPasword.match(regexPasword)) {
+      // there is a mismatch, hence show the error message
+        $('.message').css("display","inline");
+    } else {
+        // else, do not display message
+        $('.message').css("display","none");
+        window.location.href='manager.html';
+      }
   }
 
-$('#username').blur(function()
-{
-    if(!$(this).val()) {
-          $(this).addClass('warning');
-    }
-});
 
-$('#password').blur(function()
-{
-    if(!$(this).val()) {
-          $(this).addClass('warning');
-    }
-});
-
-if(!$('#password').val() || ('#username').val() ){
-  $('button-login').prop( "disabled", true );
-}

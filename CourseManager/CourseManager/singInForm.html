@@ -14,7 +14,7 @@
     <main>
       <div class="form-display show" id="login">
         <h3>Sign in</h3>
-        <form action="manager.html" method="post" novalidate="">
+        <form method="post" novalidate="">
                 <div class="item">
                   <div class = "icon">
                      <img src="assets/login.jpg" width="35px" height="35px">
@@ -22,15 +22,21 @@
                     <input data-validate-length-range="3" id="username" placeholder="My name is" 
                      required pattern="[[A-Za-z]{3,}]" type="text" maxlength="20" minlength="3">
                 </div>
+                <div> 
+                  <a class="message" >Not valid input, only Latin letters and digits are allowed</a>
+                </div>
                 <div class="item">
-                  <div class = "icon" >
-                      <img src="assets/password.png" width="35px" height="35px">
-                 </div>
+                    <div class = "icon" >
+                        <img src="assets/password.png" width="35px" height="35px">
+                    </div>
                     <input data-validate-length-range="6" id ="password" name="password" placeholder="Password" 
                     required pattern="[[A-Za-z0-9]{6,}]" type="password" maxlength="25" minlength="6">
                 </div>
-                    <input class="button-login" type="submit" value= "Sign in" onclick="getUserName()">
-         </form>
+                <div class="item"> 
+                  <a class="message" >Not valid input, only Latin letters and digits are allowed</a>
+                </div>
+                 <input class="button-login" type="button" value= "Sign in" onclick="getUserName()">
+        </form>
       </div>
     </main>
   </body>

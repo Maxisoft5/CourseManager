@@ -47,6 +47,8 @@
     border-radius: 3px;
   }
 
-  .warning {
-    border: red solid 1px;
+  .message {
+    font-size: 13px;
+    color: rgb(201, 76, 76);
+    display: none;
   }
